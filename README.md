@@ -1,5 +1,8 @@
 # flask
 
+https://theblackcat102.wordpress.com/2016/06/30/%E7%94%A8flask%E5%BB%BA%E7%AB%8Brestful-api/
+http://seanlin.logdown.com/posts/247948-introduction-to-flask-blueprints
+
 Flask is a microframework for Python based on Werkzeug, 
 Jinja 2 and good intentions. It's BSD licensed!
 
