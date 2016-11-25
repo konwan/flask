@@ -9,7 +9,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as JWT
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
-authtk = HTTPTokenAuth(scheme='Token')
+authtk = HTTPTokenAuth(scheme='Bearer')
 
 # ----------------------------  [need to enter ac and pw]  --------------------------------
 users = { "cindy": "hello", "jlin": "bye" }
@@ -34,6 +34,28 @@ def not_found(error):
 
 
 # ----------------------------  [check token]  --------------------------------
+
+tks = {
+    "secret-token-1": "cindy",
+    "secret-token-2": "jlin"
+}
+ 
+@authtk.verify_token
+def verify_token(token):
+    if token in tks:
+        g.current_user = tks[token]
+        print(g.current_user)
+        return True
+    return False
+ 
+@app.route('/checktk')
+@authtk.login_required
+def checktk():
+    return "chech token , %s  pass!" % g.current_user
+
+
+
+# ----------------------------  [generate token and check token]  --------------------------------
 
 # app.config['SECRET_KEY']
 secret_key = os.urandom(32)
